@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-cyber-volt: #C8FF00;
+    --color-iron-border: #222222;
+    --color-muted-silver: #AEAEAE;
+    --color-canvas-jet: #111110;
+    --color-deep-black: #0c0c0b;
+    --color-cyan-data: #22d3ee;
+    --color-amber-alert: #f59e0b;
+    --color-emergent: #10b981;
+
+    --background: 60 7% 7%;
+    --foreground: 0 0% 100%;
+    --card: 60 7% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 60 7% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 74 100% 50%;
+    --primary-foreground: 60 7% 7%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 68%;
+    --accent: 74 100% 50%;
+    --accent-foreground: 60 7% 7%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 13%;
+    --input: 0 0% 13%;
+    --ring: 74 100% 50%;
+    --radius: 0.25rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--color-canvas-jet);
+    color: #ffffff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-cyber-volt);
+    color: var(--color-canvas-jet);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-canvas-jet);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-iron-border);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-cyber-volt);
+  }
+}
+
+@layer components {
+  /* Blueprint grid background */
+  .bg-blueprint {
+    background-size: 50px 50px;
+    background-image:
+      linear-gradient(to right, rgba(200, 255, 0, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(200, 255, 0, 0.02) 1px, transparent 1px),
+      radial-gradient(rgba(34, 34, 34, 0.6) 1px, transparent 1px);
+    background-position: 0 0, 0 0, 25px 25px;
+  }
+
+  /* Glow effects */
+  .glow-volt {
+    box-shadow: 0 0 30px rgba(200, 255, 0, 0.15);
+  }
+  .glow-volt-hover:hover {
+    box-shadow: 0 0 40px rgba(200, 255, 0, 0.35);
+    border-color: var(--color-cyber-volt);
+  }
+
+  /* Glassmorphism */
+  .glass-card {
+    background: rgba(17, 17, 16, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Scanline effect */
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+  .scanline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to bottom, rgba(200, 255, 0, 0), rgba(200, 255, 0, 0.2), rgba(200, 255, 0, 0));
+    animation: scan 5s linear infinite;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Font mono tech */
+  .font-mono-tech {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+  }
+
+  /* Arabic support */
+  .ar {
+    direction: rtl;
+  }
+
+  /* Radial glow section */
+  .radial-glow-section {
+    position: relative;
+  }
+  .radial-glow-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), rgba(200, 255, 0, 0.06), transparent 80%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .d1 { transition-delay: 0.08s; }
+  .d2 { transition-delay: 0.18s; }
+  .d3 { transition-delay: 0.28s; }
+  .d4 { transition-delay: 0.38s; }
+
+  /* Range slider styling */
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: #222222;
+    border-radius: 2px;
+    border: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 2px;
+    background: #C8FF00;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6px;
+    box-shadow: 0 0 10px rgba(200, 255, 0, 0.4);
+    transition: background-color 0.2s, transform 0.1s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover {
+    background: #d4ff33;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(200, 255, 0, 0.7);
+  }
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: #222222;
+    border-radius: 2px;
+  }
+  input[type=range]::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 2px;
+    background: #C8FF00;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(200, 255, 0, 0.4);
+    border: none;
+  }
+}
+
+@layer utilities {
+  .border-iron {
+    border-color: var(--color-iron-border);
+  }
+  .bg-canvas {
+    background-color: var(--color-canvas-jet);
+  }
+  .text-volt {
+    color: var(--color-cyber-volt);
+  }
+  .bg-volt {
+    background-color: var(--color-cyber-volt);
+  }
+  .border-volt {
+    border-color: var(--color-cyber-volt);
+  }
+  .text-silver {
+    color: var(--color-muted-silver);
+  }
+  .text-cyan-data {
+    color: var(--color-cyan-data);
+  }
+  .text-amber-alert {
+    color: var(--color-amber-alert);
+  }
+  .text-emergent {
+    color: var(--color-emergent);
+  }
+}
+
+@keyframes scan {
+  0% { top: -10px; }
+  100% { top: 100%; }
+}
+
+@keyframes loaderFill {
+  0% { width: 0%; }
+  30% { width: 38%; }
+  60% { width: 68%; }
+  85% { width: 88%; }
+  100% { width: 100%; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
